@@ -30,6 +30,8 @@ def index():
             angle = float(request.form.get("angle"))
             body_part_str = request.form.get("body_part")
 
+            if distance < 0 or distance > 52.5:
+                raise ValueError("Distanța trebuie să fie între 0 și 52.5 metri")
             # Mapăm string -> 0/1
             if body_part_str == "foot":
                 body_part = 0

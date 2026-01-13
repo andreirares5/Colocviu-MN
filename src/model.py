@@ -33,7 +33,8 @@ def build_target_vector(df):
     """
     Vectorul țintă y = goal (0 sau 1).
     """
-    return df["goal"].values
+    return df["xg"].values
+
 
 
 def predict(beta, distance, angle, body_part):

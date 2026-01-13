@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import numpy as np
 import sys
 import os
+# iahim - import csv 
 
 # Adăugăm ../src în sys.path ca să putem importa model.py
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -18,6 +19,17 @@ app = Flask(__name__)
 BETA_PATH = os.path.join(DATA_DIR, "beta.npy")
 beta = np.load(BETA_PATH)
 
+# iahim - LOG_PATH = os.path.join(DATA_DIR, "shot_log.csv")
+
+# iahim -def log_shot(distance, angle, body_part_str, xg_value):
+# iahim -    os.makedirs(DATA_DIR, exist_ok=True)
+# iahim -    new_file = not os.path.exists(LOG_PATH)
+
+# iahim -    with open(LOG_PATH, "a", newline="", encoding="utf-8") as f:
+# iahim -        w = csv.writer(f)
+# iahim -        if new_file:
+# iahim -            w.writerow(["distance", "angle", "body_part", "xg_pred"])
+# iahim -        w.writerow([distance, angle, body_part_str, xg_value])
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -42,6 +54,7 @@ def index():
 
             xg_value = predict(beta, distance, angle, body_part)
             xg_value = max(0.0, min(1.0, xg_value))  # clamp în [0,1]
+# iahim -            log_shot(distance, angle, body_part_str, xg_value)
 
         except Exception as e:
             error = f"Eroare la citirea datelor: {e}"

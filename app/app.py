@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import numpy as np
 import sys
 import os
-# iahim - import csv 
+import csv 
 
 # Adăugăm ../src în sys.path ca să putem importa model.py
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

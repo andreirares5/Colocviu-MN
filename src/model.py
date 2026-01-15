@@ -2,17 +2,10 @@ import numpy as np
 import pandas as pd
 
 def load_data(path):
-    """
-    Încarcă dataset-ul shots.csv și returnează un DataFrame.
-    """
     return pd.read_csv(path)
 
 
 def build_design_matrix(df):
-    """
-    Construiește matricea A pentru modelul xG:
-    A = [1, d, angle, body_part, d^2, angle^2]
-    """
     d = df["distance"].values
     angle = df["angle"].values
     b = df["body_part"].values
@@ -30,17 +23,11 @@ def build_design_matrix(df):
 
 
 def build_target_vector(df):
-    """
-    Vectorul țintă y = goal (0 sau 1).
-    """
     return df["xg"].values
 
 
 
 def predict(beta, distance, angle, body_part):
-    """
-    Calculează xG pentru un singur șut folosind coeficienții beta.
-    """
     x = np.array([
         1,
         distance,
